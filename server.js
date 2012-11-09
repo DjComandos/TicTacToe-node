@@ -1,7 +1,8 @@
 // https://github.com/LearnBoost/socket.io
 // http://twitter.github.com/bootstrap/base-css.html#buttons
 
-var express = require('express'),
+var path = require('path'),
+    express = require('express'),
     port = process.env.PORT || 8080,
     app = express(),
     server = require('http').createServer(app),
@@ -12,11 +13,7 @@ var express = require('express'),
     games = {},     /* contains all created games */
     opponents = {}; /* contains sockets of all playes for each game */
 
-app.set('view engine', 'html');
-app.get('/', function(req, res) {
-    res.render('Index');
-});
-
+app.use(express.static(path.join(__dirname, 'static')));
 io.set('log level', 1);
 
 io.sockets.on('connection', function (socket) {
