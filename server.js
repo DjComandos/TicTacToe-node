@@ -1,7 +1,7 @@
 // https://github.com/LearnBoost/socket.io
 // http://twitter.github.com/bootstrap/base-css.html#buttons
 
-var expres = require('express'),
+var express = require('express'),
     port = process.env.PORT || 8080,
     app = express(),
     server = require('http').createServer(app),
