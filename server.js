@@ -1,7 +1,9 @@
 // https://github.com/LearnBoost/socket.io
 // http://twitter.github.com/bootstrap/base-css.html#buttons
 
-var port = 8080,
+var expres = require('express'),
+
+    port = process.env.PORT || 8080,
     io = require('socket.io').listen(port),
     game = require('./game.js').gameTicTacToe(), /* custom module with that encapsulates game's logic */
     gameState = {}, /* contains TicTacToe object for each created game */
