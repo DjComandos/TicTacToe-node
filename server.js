@@ -2,14 +2,20 @@
 // http://twitter.github.com/bootstrap/base-css.html#buttons
 
 var expres = require('express'),
-
     port = process.env.PORT || 8080,
-    io = require('socket.io').listen(port),
+    app = express(),
+    server = require('http').createServer(app),
+    io = require('socket.io').listen(server),
     game = require('./game.js').gameTicTacToe(), /* custom module with that encapsulates game's logic */
     gameState = {}, /* contains TicTacToe object for each created game */
     users = {},     /* contains all users connected to the server */
     games = {},     /* contains all created games */
     opponents = {}; /* contains sockets of all playes for each game */
+
+app.set('view engine', 'html');
+app.get('/', function(req, res) {
+    res.render('Index');
+});
 
 io.set('log level', 1);
 
@@ -123,3 +129,5 @@ io.sockets.on('connection', function (socket) {
         changeUsersCount();
     });
 });
+
+server.listen(port);
